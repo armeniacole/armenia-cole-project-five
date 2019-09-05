@@ -24,22 +24,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const dbRef = firebase.database().ref("goal");
+    const dbRef = firebase.database().ref();
 
     dbRef.on('value', (data) => {
 
-      const goal = data.val();
-
-      const activity = goal.activity;
-      const number = goal.number;
-
-      console.log(goal)
-      console.log(activity)
-      console.log(number)
+      const dataBase = data.val();
+      console.log(dataBase);
+      const activity = dataBase.goal.activity;
+      const number = dataBase.goal.number;
+      const tracker = dataBase.tracker;
+      console.log(tracker)
 
       this.setState({
         userGoal: activity,
-        goalAmount: number
+        goalAmount: number,
+        month: tracker
       })
 
     });
@@ -53,13 +52,11 @@ class App extends Component {
     this.setState({
       month: copiedArray
     })
+
+    const dbRef = firebase.database().ref("tracker");
+
+    dbRef.set(this.state.month)
   }
-
-  // trackerToFirebase = () => {
-  //   const dbRef = firebase.database().ref("tracker");
-
-  //   dbRef.set(this.state.month)
-  // }
 
   render(){
 
