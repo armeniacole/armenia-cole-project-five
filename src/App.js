@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       userGoal: '',
       goalAmount: 0,
+      monOne: 0
 
     }
   }
@@ -21,6 +22,29 @@ class App extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     })
+  }
+
+  componentDidMount() {
+    const dbRef = firebase.database().ref("goal");
+
+    dbRef.on('value', (data) => {
+
+      const goal = data.val();
+
+      const activity = goal.activity;
+      const number = goal.number;
+
+      console.log(goal)
+      console.log(activity)
+      console.log(number)
+
+      this.setState({
+        userGoal: activity,
+        goalAmount: number
+      })
+
+
+    });
   }
 
   render(){
@@ -36,7 +60,7 @@ class App extends Component {
           updateGoal={this.handleChange}
         />
         <p>some instructions</p>
-        <Tracker/>
+        <Tracker monOneState={this.state.monOne}/>
         <Message/>
       </div>
     );

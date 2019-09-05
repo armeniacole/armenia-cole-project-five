@@ -13,7 +13,7 @@ class Tracker extends Component {
                 <p>Friday</p>
                 <p>Saturday</p>
                 <p>Sunday</p>
-                <Counter/>
+                <Counter name="monOne" onChange={this.props.monOneState}/>
                 <Counter />
                 <Counter />
                 <Counter />

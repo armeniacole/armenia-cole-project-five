@@ -5,45 +5,55 @@ class SetGoal extends Component {
     pushToFirebase = (event) => {
         event.preventDefault();
 
-        console.log(this.props.goalState);
-        console.log(this.props.goalString);
+        // console.log(this.props.goalState);
+        // console.log(this.props.goalString);
 
         const dbRef = firebase.database().ref("goal");
         dbRef.set({
             number: this.props.goalState,
             activity: this.props.goalString
         });
-    }
+    };
 
     render(){
+
         return(
-            <form onSubmit={this.pushToFirebase} action="" className="set-goal">
+            
+            <section className="goals">
+                <form onSubmit={this.pushToFirebase} action="" className="set-goal">
+                    <fieldset>
+                        <legend>Update Goal</legend>
+                        <div>
+                            <p>What activity is your goal for?</p>
+                            <input 
+                                name="userGoal"
+                                type="text"
+                                onChange={this.props.updateGoal}
+                            />
+                        </div>
+                        <div>
+                            <p>How many times per week?</p>
+                            <select 
+                                name="goalAmount" 
+                                onChange={this.props.updateGoal}
+                            >
+                                <option value="0">Chose an amount</option>
+                                <option value="1">Once</option>
+                                <option value="2">Twice</option>
+                                <option value="3">Three times</option>
+                                <option value="4">Four times</option>
+                                <option value="5">Five times</option>
+                                <option value="6">Six times</option>
+                                <option value="7">Seven times</option>
+                            </select> 
+                        </div>
+                        <button>Save Goal</button>
+                    </fieldset>
+                </form>  
                 <div>
-                    <p>What activity is your goal for?</p>
-                    <input 
-                        name="userGoal"
-                        type="text"
-                        onChange={this.props.updateGoal}
-                    />
-                </div>
-                <div>
-                    <p>How many times per week?</p>
-                    <select 
-                        name="goalAmount" 
-                        onChange={this.props.updateGoal}
-                    >
-                        <option value="0">Chose an amount</option>
-                        <option value="1">Once</option>
-                        <option value="2">Twice</option>
-                        <option value="3">Three times</option>
-                        <option value="4">Four times</option>
-                        <option value="5">Five times</option>
-                        <option value="6">Six times</option>
-                        <option value="7">Seven times</option>
-                    </select> 
-                </div>
-                <button>Submit</button>
-            </form>    
+                    <p>Your goal is to {this.props.goalString} {this.props.goalState} times a week!</p>
+                </div>  
+            </section>
         );
     }
 
