@@ -5,9 +5,6 @@ class SetGoal extends Component {
     pushToFirebase = (event) => {
         event.preventDefault();
 
-        // console.log(this.props.goalState);
-        // console.log(this.props.goalString);
-
         const dbRef = firebase.database().ref("goal");
         dbRef.set({
             number: this.props.goalState,

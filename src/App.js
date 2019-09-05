@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.scss';
 import firebase from './firebase';
 import SetGoal from './SetGoal';
-import Tracker from './Tracker';
+import Counter from './Counter';
 import Message from './Message';
 
 class App extends Component {
@@ -12,8 +12,7 @@ class App extends Component {
     this.state = {
       userGoal: '',
       goalAmount: 0,
-      monOne: 0
-
+      month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
     }
   }
 
@@ -43,9 +42,24 @@ class App extends Component {
         goalAmount: number
       })
 
-
     });
   }
+
+  trackerValue = (event, weekIndex, dayIndex) => {
+    
+    const copiedArray = [...this.state.month];
+    copiedArray[weekIndex][dayIndex] = event.target.value;
+
+    this.setState({
+      month: copiedArray
+    })
+  }
+
+  // trackerToFirebase = () => {
+  //   const dbRef = firebase.database().ref("tracker");
+
+  //   dbRef.set(this.state.month)
+  // }
 
   render(){
 
@@ -60,7 +74,32 @@ class App extends Component {
           updateGoal={this.handleChange}
         />
         <p>some instructions</p>
-        <Tracker monOneState={this.state.monOne}/>
+        <section className="tracker">
+          <p>Monday</p>
+          <p>Tuesday</p>
+          <p>Wednesday</p>
+          <p>Thursday</p>
+          <p>Friday</p>
+          <p>Saturday</p>
+          <p>Sunday</p>
+
+          {
+            this.state.month.map((week, weekIndex) => {
+              return(
+                week.map((day, dayIndex) => {
+                  return <Counter 
+                            key={weekIndex+dayIndex}
+                            dayIndex={dayIndex}
+                            weekIndex={weekIndex}
+                            trackerFunction={this.trackerValue}
+                          />
+                })
+              )
+            })
+
+          }
+
+        </section>
         <Message/>
       </div>
     );
