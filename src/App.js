@@ -33,7 +33,7 @@ class App extends Component {
       const activity = dataBase.goal.activity;
       const number = dataBase.goal.number;
       const tracker = dataBase.tracker;
-      console.log(tracker)
+      // console.log(tracker)
 
       this.setState({
         userGoal: activity,
@@ -47,7 +47,13 @@ class App extends Component {
   trackerValue = (event, weekIndex, dayIndex) => {
     
     const copiedArray = [...this.state.month];
-    copiedArray[weekIndex][dayIndex] = event.target.value;
+
+    const selected = Number(event.target.value);
+
+    if (typeof(selected) === "number") {
+      copiedArray[weekIndex][dayIndex] = selected;
+    }
+    // copiedArray[weekIndex][dayIndex] = event.target.value;
 
     this.setState({
       month: copiedArray
@@ -89,6 +95,7 @@ class App extends Component {
                             dayIndex={dayIndex}
                             weekIndex={weekIndex}
                             trackerFunction={this.trackerValue}
+                            value={this.state.month[weekIndex][dayIndex]}
                           />
                 })
               )
