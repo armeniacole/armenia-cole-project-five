@@ -41,6 +41,12 @@ class App extends Component {
         month: tracker
       })
 
+    const sum = this.state.month[0].reduce((total, integer) => {
+      console.log(this.state.month[0])
+      return total + integer
+    })
+    console.log(sum)
+
     });
   }
 
@@ -54,7 +60,7 @@ class App extends Component {
       copiedArray[weekIndex][dayIndex] = selected;
     }
     // copiedArray[weekIndex][dayIndex] = event.target.value;
-
+    
     this.setState({
       month: copiedArray
     })
@@ -64,8 +70,29 @@ class App extends Component {
     dbRef.set(this.state.month)
   }
 
-  render(){
+  handleClear = (event) => {
+    event.preventDefault();
 
+    this.setState({
+      month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
+    })
+
+    const dbRef = firebase.database().ref("tracker");
+    dbRef.set(this.state.month);
+
+  }
+
+  // addWeekly = (weekArray) => {
+  //   const total = weekArray.reduce((total, integer) => {
+  //     return total + integer
+  //   })
+
+  //   console.log(total)
+  // }
+  
+
+  render(){
+    
     return (
       <div className="App">
         <header>
@@ -102,9 +129,14 @@ class App extends Component {
             })
 
           }
-
+          <button onClick={this.handleClear}>Clear Tracked Data</button>
         </section>
-        <Message/>
+        <Message 
+          addWeekly={this.addWeekly}
+          goalState={this.state.goalAmount}
+          month={this.state.month}
+        />
+        {/* <p>{() => this.state.month[0]} please work?</p> */}
       </div>
     );
   }

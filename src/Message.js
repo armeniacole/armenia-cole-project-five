@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const Message = (props) =>  {
-    // need some way to track which week they are using
-    // maybe messages should include a week 1,2,3,4 label?
+class Message extends Component {
+    
 
 
     // if (weeklyTimes < goal) {
@@ -12,11 +11,22 @@ const Message = (props) =>  {
     // } elseif (weeklyTimes > goal) {
     //     return `{} times! You Overachiever!`
     // }
-    return(
-        <section>
-            <p>{}dynamic message here</p>
-        </section>
-    );
+
+    
+    render(){
+
+        return(
+            <section>
+                <p>{this.props.goalState} dynamic message here</p>
+                {/* <p>{() => this.props.addWeekly(this.props.month[0])} does this work?</p> */}
+    
+                {
+                    
+                }
+            </section>
+        );
+
+    }
 
 }
 

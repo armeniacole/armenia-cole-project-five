@@ -12,6 +12,7 @@ class Counter extends Component {
                 <option selected={this.props.value === 1 ? "selected" : "false"} value="1">1</option>
                 <option selected={this.props.value === 2 ? "selected" : "false"} value="2">2</option>
                 <option selected={this.props.value === 3 ? "selected" : "false"} value="3">3</option>
+                <option selected={this.props.value === "add" ? "selected" : "false"} value="add">Add</option>
 
             </select> 
         );
