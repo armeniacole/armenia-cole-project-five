@@ -3,7 +3,7 @@ import './App.scss';
 import firebase from './firebase';
 import SetGoal from './SetGoal';
 import Counter from './Counter';
-import Message from './Message';
+
 
 class App extends Component {
 
@@ -27,6 +27,9 @@ class App extends Component {
     })
   }
 
+
+
+
   componentDidMount() {
     const dbRef = firebase.database().ref();
 
@@ -49,11 +52,16 @@ class App extends Component {
       this.addWeekly(this.state.month[1], "weekTwo");
       this.addWeekly(this.state.month[2], "weekThree");
       this.addWeekly(this.state.month[3], "weekFour");
-  
-      
     });
 
   }
+
+  updateTracker = () => {
+    const dbRef = firebase.database().ref("tracker");
+
+    dbRef.set(this.state.month)
+  }
+
 
   trackerValue = (event, weekIndex, dayIndex) => {
     
@@ -68,24 +76,23 @@ class App extends Component {
     
     this.setState({
       month: copiedArray
-    })
-
-    const dbRef = firebase.database().ref("tracker");
-
-    dbRef.set(this.state.month)
+    },this.updateTracker)
   }
+
+
+
 
   handleClear = (event) => {
     event.preventDefault();
 
     this.setState({
       month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
-    })
-
-    const dbRef = firebase.database().ref("tracker");
-    dbRef.set(this.state.month);
+    },this.updateTracker)
 
   }
+
+
+
 
   addWeekly = (weekArray, weekState) => {
     const total = weekArray.reduce((total, integer) => {
@@ -98,6 +105,10 @@ class App extends Component {
     console.log(name)
   }
   
+
+
+
+
   render(){
     const progressMessage = (weekState) => {
       if (weekState == 0) {
@@ -149,11 +160,6 @@ class App extends Component {
           }
           <button onClick={this.handleClear}>Clear Tracked Data</button>
         </section>
-        {/* <Message 
-          addWeekly={this.addWeekly}
-          goalState={this.state.goalAmount}
-          month={this.state.month}
-        /> */}
         <p>Week One: {progressMessage(this.state.weekOne)}</p>
         <p>Week Two: {progressMessage(this.state.weekTwo)}</p>
         <p>Week Three: {progressMessage(this.state.weekThree)}</p>
