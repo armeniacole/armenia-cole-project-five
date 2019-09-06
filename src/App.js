@@ -14,7 +14,6 @@ class App extends Component {
       goalAmount: 0,
       month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]],
       total: "",
-      weekOneTotal: ""
     }
   }
 
@@ -24,8 +23,6 @@ class App extends Component {
       [event.target.name]: event.target.value,
     })
   }
-
-  
 
   componentDidMount() {
     const dbRef = firebase.database().ref();
@@ -49,8 +46,6 @@ class App extends Component {
       // console.log("weekOne", weekOne)
       
     });
-
-   
 
   }
 
@@ -96,9 +91,19 @@ class App extends Component {
     // console.log(total)
   }
   
-
   render(){
-    
+    const progressMessage = (weekState) => {
+      if (weekState == 0) {
+        return 
+      } else if (weekState < this.state.goalAmount) {
+        return <p>You have {this.state.goalAmount - weekState} more time(s) reach this weeks goal</p>
+      } else if (weekState == this.state.goalAmount) {
+        return <p>Congrats! You have meet your goal for this week!</p>
+      } else if (weekState > this.state.goalAmount) {
+        return <p>You have surpassed your goal!</p>
+      } 
+    }
+
     return (
       <div className="App">
         <header>
@@ -137,12 +142,15 @@ class App extends Component {
           }
           <button onClick={this.handleClear}>Clear Tracked Data</button>
         </section>
-        <Message 
+        {/* <Message 
           addWeekly={this.addWeekly}
           goalState={this.state.goalAmount}
           month={this.state.month}
-        />
-         
+        /> */}
+        <p>Week One: {progressMessage(this.state.total)}</p>
+        <p>Week Two: {progressMessage()}</p>
+        <p>Week Three: {progressMessage()}</p>
+        <p>Week Four: {progressMessage()}</p>
       </div>
     );
   }
