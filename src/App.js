@@ -13,7 +13,10 @@ class App extends Component {
       userGoal: '',
       goalAmount: 0,
       month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]],
-      total: "",
+      weekOne: "",
+      weekTwo: "",
+      weekThree: "",
+      weekFour: "",
     }
   }
 
@@ -42,8 +45,11 @@ class App extends Component {
         month: tracker
       })
 
-      const weekOne = this.addWeekly(this.state.month[0]);
-      // console.log("weekOne", weekOne)
+      this.addWeekly(this.state.month[0], "weekOne");
+      this.addWeekly(this.state.month[1], "weekTwo");
+      this.addWeekly(this.state.month[2], "weekThree");
+      this.addWeekly(this.state.month[3], "weekFour");
+  
       
     });
 
@@ -81,14 +87,15 @@ class App extends Component {
 
   }
 
-  addWeekly = (weekArray) => {
+  addWeekly = (weekArray, weekState) => {
     const total = weekArray.reduce((total, integer) => {
       return total + integer
     })
+    const name = weekState
     this.setState({
-      total: total
+      [name]: total
     })
-    // console.log(total)
+    console.log(name)
   }
   
   render(){
@@ -147,10 +154,10 @@ class App extends Component {
           goalState={this.state.goalAmount}
           month={this.state.month}
         /> */}
-        <p>Week One: {progressMessage(this.state.total)}</p>
-        <p>Week Two: {progressMessage()}</p>
-        <p>Week Three: {progressMessage()}</p>
-        <p>Week Four: {progressMessage()}</p>
+        <p>Week One: {progressMessage(this.state.weekOne)}</p>
+        <p>Week Two: {progressMessage(this.state.weekTwo)}</p>
+        <p>Week Three: {progressMessage(this.state.weekThree)}</p>
+        <p>Week Four: {progressMessage(this.state.weekFour)}</p>
       </div>
     );
   }
