@@ -110,6 +110,7 @@ class App extends Component {
 
 
   render(){
+    
     const progressMessage = (weekState) => {
       if (weekState == 0) {
         return 
@@ -125,7 +126,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Name of App</h1>
+          <h1>(re)solution</h1>
         </header>
         <SetGoal 
           goalState={this.state.goalAmount} 
@@ -158,8 +159,11 @@ class App extends Component {
             })
 
           }
-          <button onClick={this.handleClear}>Clear Tracked Data</button>
         </section>
+          <button onClick={this.handleClear}>Clear Tracked Data</button>
+        {/* <button onClick={(event) => { if (window.confirm('Delete the item?')) { this.handleClear() }; }}>Clear Tracked Data</button> */}
+
+
         <p>Week One: {progressMessage(this.state.weekOne)}</p>
         <p>Week Two: {progressMessage(this.state.weekTwo)}</p>
         <p>Week Three: {progressMessage(this.state.weekThree)}</p>
