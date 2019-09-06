@@ -12,7 +12,9 @@ class App extends Component {
     this.state = {
       userGoal: '',
       goalAmount: 0,
-      month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
+      month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]],
+      total: "",
+      weekOneTotal: ""
     }
   }
 
@@ -22,6 +24,8 @@ class App extends Component {
       [event.target.name]: event.target.value,
     })
   }
+
+  
 
   componentDidMount() {
     const dbRef = firebase.database().ref();
@@ -41,13 +45,13 @@ class App extends Component {
         month: tracker
       })
 
-    const sum = this.state.month[0].reduce((total, integer) => {
-      console.log(this.state.month[0])
-      return total + integer
-    })
-    console.log(sum)
-
+      const weekOne = this.addWeekly(this.state.month[0]);
+      // console.log("weekOne", weekOne)
+      
     });
+
+   
+
   }
 
   trackerValue = (event, weekIndex, dayIndex) => {
@@ -82,13 +86,15 @@ class App extends Component {
 
   }
 
-  // addWeekly = (weekArray) => {
-  //   const total = weekArray.reduce((total, integer) => {
-  //     return total + integer
-  //   })
-
-  //   console.log(total)
-  // }
+  addWeekly = (weekArray) => {
+    const total = weekArray.reduce((total, integer) => {
+      return total + integer
+    })
+    this.setState({
+      total: total
+    })
+    // console.log(total)
+  }
   
 
   render(){
@@ -136,7 +142,7 @@ class App extends Component {
           goalState={this.state.goalAmount}
           month={this.state.month}
         />
-        {/* <p>{() => this.state.month[0]} please work?</p> */}
+         
       </div>
     );
   }
