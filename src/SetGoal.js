@@ -17,6 +17,9 @@ class SetGoal extends Component {
         return(
             
             <section className="goals">
+                <div>
+                    <p>Your goal is to {this.props.goalString} {this.props.goalState} times a week!</p>
+                </div>  
                 <form onSubmit={this.pushToFirebase} action="" className="set-goal">
                     <fieldset>
                         <legend>Update Goal</legend>
@@ -47,9 +50,6 @@ class SetGoal extends Component {
                         <button>Save Goal</button>
                     </fieldset>
                 </form>  
-                <div>
-                    <p>Your goal is to {this.props.goalString} {this.props.goalState} times a week!</p>
-                </div>  
             </section>
         );
     }

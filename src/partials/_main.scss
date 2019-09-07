@@ -1,0 +1,47 @@
+html {
+    background: $background;
+    font-size: calc(1.5vw + 10px);
+    line-height: 1.5;
+}
+
+h1  {
+    font-family: 'Work Sans', sans-serif;
+    color: $main;
+    margin: 10px 0;
+}
+
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: $text;
+}
+
+select {
+    background: $background;
+    border: none;
+	border-bottom: 5px solid $main;
+	width: 100%;
+    padding: 10px;
+	color: $text;
+
+	/* Here's the code we need */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	 -o-appearance: none;
+		appearance: none;
+}
+
+.select-container {
+	position: relative;	
+}
+
+.select-container:after {
+	font-family: 'Font Awesome 5 Solid';
+  	content: '\f107';
+  	// font-size: 28px;
+  	position: absolute;
+  	top: 12px;
+  	right: 20px;
+  	color: #434B67;
+  	// pointer-events: none;
+}
