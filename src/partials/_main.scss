@@ -115,12 +115,15 @@ header {
 	transform: translateX(-50%);	
 	z-index: 10;
 
-	p {
+	label {
 		color: $background;
+		font-size: 1rem;
+		font-family: 'Source Sans Pro', sans-serif;
 	}
 
 	input {
 		border: none;
+		margin-bottom: 10px;
 		border-top: 5px solid transparent;
 		border-bottom: 5px solid $background;
 		width: 60%;
@@ -147,12 +150,13 @@ header {
 	select {
 		width: 60%;
 		margin: 0 auto 40px;
-		text-align: center;
+		// text-align: center;
 		border-top: 5px solid transparent;
 		border-bottom: 5px solid $background;
 		background: $main;
-		padding: 10px;
+		padding: 10px 10px 10px 30px;
 		color: $background;
+		font-size: 0.8rem;
 
 
 		&:hover {
@@ -163,6 +167,19 @@ header {
 			border: 5px solid $background;
 		}
 		
+	}
+
+	.goal-select-arrow {
+		color: $background;
+		right: 150px;
+		bottom: 55px;
+		// padding-right: 5px;
+		font-size: 1.5rem;
+		position:absolute;
+		display:block;
+		z-index: 5;
+		margin: 0;
+		pointer-events:none;
 	}
 
 	button {

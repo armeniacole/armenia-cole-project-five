@@ -8,6 +8,7 @@ class Counter extends Component {
         return(
             <div className="select-container">
                 <FontAwesomeIcon icon={faSortDown} className="select-arrow" />
+                <label className="visually-hidden" htmlFor="times">Enter a value for this day</label>
                 <select
                     name="times"
                     onChange={(event) => this.props.trackerFunction(event, this.props.weekIndex, this.props.dayIndex)}
