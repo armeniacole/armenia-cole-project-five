@@ -17,6 +17,7 @@ class App extends Component {
       weekTwo: "",
       weekThree: "",
       weekFour: "",
+      isHidden: true,
     }
   }
 
@@ -27,7 +28,11 @@ class App extends Component {
     })
   }
 
-
+  toggleHidden() {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
 
 
   componentDidMount() {
@@ -127,12 +132,19 @@ class App extends Component {
       <div className="App">
         <header>
           <h1>(re)solution</h1>
+          <button onClick={this.toggleHidden.bind(this)}>Set/Update Goal</button>
         </header>
-        <SetGoal 
-          goalState={this.state.goalAmount} 
-          goalString={this.state.userGoal} 
+        <div>
+          <h2>Your goal is to <span>{this.state.userGoal}</span> : <span>{this.state.goalAmount}</span> times a week!</h2>
+        </div>  
+        {!this.state.isHidden && <SetGoal
+          goalState={this.state.goalAmount}
+          goalString={this.state.userGoal}
           updateGoal={this.handleChange}
-        />
+          toggleHidden={this.toggleHidden}
+          toggle={this.state.isHidden}
+        />}
+        
         <p>some instructions</p>
         <section className="tracker">
           <p>Monday</p>

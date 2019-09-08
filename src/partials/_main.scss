@@ -1,18 +1,35 @@
 html {
     background: $background;
     font-size: calc(1.5vw + 10px);
-    line-height: 1.5;
+	line-height: 1.5;
+	width: 90%;
+	margin: 0 auto;
 }
 
 h1  {
-    font-family: 'Work Sans', sans-serif;
+	font-family: 'Work Sans', sans-serif;
+	font-size: 1.5rem;
     color: $main;
-    margin: 10px 0;
+	margin: 10px 0;
+	text-align: left;
+}
+
+h2  {
+	font-family: 'Work Sans', sans-serif;
+	font-size: 1.3rem;
+	color: $text;
+	margin-top: 0;
+	
+	span {
+		text-transform: uppercase;
+		color: $main;
+	}
 }
 
 p {
     font-family: 'Source Sans Pro', sans-serif;
-    color: $text;
+	color: $text;
+	margin: 0;
 }
 
 select {
@@ -44,4 +61,121 @@ select {
   	right: 20px;
   	color: #434B67;
   	// pointer-events: none;
+}
+
+button {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	button {
+		height: 70%;
+		border: 3px solid $main;
+		border-radius: 10px;
+		color: $text;
+		padding: 10px 20px;
+		background: $background;
+		font-size: 0.8rem;
+
+		&:hover {
+			background: $main;
+			color: $background;
+		}
+
+		&:focus {
+			background: $main;
+			color: $background;
+		}
+	}
+}
+
+.goals {
+	width: 70%;
+	margin: 0 auto;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);	
+	z-index: 10;
+
+	p {
+		color: $background;
+	}
+
+	input {
+		border: none;
+		border-top: 5px solid transparent;
+		border-bottom: 5px solid $background;
+		width: 60%;
+		background: $main;
+		padding: 10px;
+		font-size: 0.8rem;
+		text-align: center;
+		color: $background;
+
+		&::placeholder {
+			color: $background;
+			font-family: 'Source Sans Pro', sans-serif;
+		}
+
+		&:hover {
+			border: 5px solid $background;
+		}
+
+		&:focus {
+			border: 5px solid $background;
+		}
+	}
+
+	select {
+		width: 60%;
+		margin: 0 auto 40px;
+		text-align: center;
+		border-top: 5px solid transparent;
+		border-bottom: 5px solid $background;
+		background: $main;
+		padding: 10px;
+		color: $background;
+
+
+		&:hover {
+			border: 5px solid $background;
+		}
+
+		&:focus {
+			border: 5px solid $background;
+		}
+		
+	}
+
+	button {
+		border: none;
+		padding: 10px;
+		background: $background;
+		color: $main;
+		border-radius: 5px;
+		// box-shadow: 5px 5px #208AAE;
+
+		&:hover {
+			background: $text;
+			color: $background;
+		}
+
+		&:focus {
+			background: $text;
+			color: $background;
+		}
+
+	}
+
+	fieldset {
+		border: 3px solid $background;
+		width: 65%;
+		margin: 0 auto;
+		background: $main;
+		border-radius: 10px;
+	}
 }

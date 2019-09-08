@@ -17,17 +17,15 @@ class SetGoal extends Component {
         return(
             
             <section className="goals">
-                <div>
-                    <p>Your goal is to {this.props.goalString} {this.props.goalState} times a week!</p>
-                </div>  
                 <form onSubmit={this.pushToFirebase} action="" className="set-goal">
                     <fieldset>
-                        <legend>Update Goal</legend>
+                        {/* <legend>Update Goal</legend> */}
                         <div>
                             <p>What activity is your goal for?</p>
                             <input 
                                 name="userGoal"
                                 type="text"
+                                placeholder="eg: go for a run"
                                 onChange={this.props.updateGoal}
                             />
                         </div>
@@ -47,7 +45,7 @@ class SetGoal extends Component {
                                 <option value="7">Seven times</option>
                             </select> 
                         </div>
-                        <button>Save Goal</button>
+                        <button onClick={this.props.toggleHidden}>Save Goal</button>
                     </fieldset>
                 </form>  
             </section>
