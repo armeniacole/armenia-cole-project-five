@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import './App.scss';
 import firebase from './firebase';
 import SetGoal from './SetGoal';
 import Counter from './Counter';
 
+const provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth();
 
 class App extends Component {
 
@@ -18,6 +21,7 @@ class App extends Component {
       weekThree: "",
       weekFour: "",
       isHidden: true,
+      user: null
     }
     this.toggleHidden = this.toggleHidden.bind(this);
   }
@@ -30,7 +34,7 @@ class App extends Component {
   }
 
   toggleHidden() {
-    console.log('stat', this.state);
+    // console.log('stat', this.state);
     // console.log("toggle")
     this.setState({
       isHidden: !this.state.isHidden
@@ -39,33 +43,43 @@ class App extends Component {
 
 
   componentDidMount() {
-    const dbRef = firebase.database().ref();
+    
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user }, () => {
+          console.log(this.state.user.uid)
+          // {this.state.user ? `users/${this.state.user.uid}` : ``}
+          // {userIsLoggedIn ? <h1>Welcome, friend!</h1> : null}
+          const dbRef = firebase.database().ref(this.state.user ? `users/${this.state.user.uid}` : ``);
+          dbRef.on('value', (data) => {
+      
+            const dataBase = data.val();
+            // console.log(dataBase);
+            const activity = dataBase.goal.activity;
+            const number = dataBase.goal.number;
+            const tracker = dataBase.tracker;
+      
+            this.setState({
+              userGoal: activity,
+              goalAmount: number,
+              month: tracker
+            })
+      
+            this.addWeekly(this.state.month[0], "weekOne");
+            this.addWeekly(this.state.month[1], "weekTwo");
+            this.addWeekly(this.state.month[2], "weekThree");
+            this.addWeekly(this.state.month[3], "weekFour");
+          });
 
-    dbRef.on('value', (data) => {
-
-      const dataBase = data.val();
-      console.log(dataBase);
-      const activity = dataBase.goal.activity;
-      const number = dataBase.goal.number;
-      const tracker = dataBase.tracker;
-      // console.log(tracker)
-
-      this.setState({
-        userGoal: activity,
-        goalAmount: number,
-        month: tracker
-      })
-
-      this.addWeekly(this.state.month[0], "weekOne");
-      this.addWeekly(this.state.month[1], "weekTwo");
-      this.addWeekly(this.state.month[2], "weekThree");
-      this.addWeekly(this.state.month[3], "weekFour");
+        });
+      }
     });
+
 
   }
 
   updateTracker = () => {
-    const dbRef = firebase.database().ref("tracker");
+    const dbRef = firebase.database().ref(this.state.user ? `users/${this.state.user.uid}/tracker` : `tracker`);
 
     dbRef.set(this.state.month)
   }
@@ -110,10 +124,28 @@ class App extends Component {
     this.setState({
       [name]: total
     })
-    console.log(name)
+    // console.log(name)
   }
   
 
+  login = () => {
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        this.setState({
+          user
+        });
+      });
+  }
+
+  logout = () => {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      });
+  }
 
 
 
@@ -136,6 +168,7 @@ class App extends Component {
         <header>
           <h1>(re)solution</h1>
           <button onClick={this.toggleHidden.bind(this)}>Set/Update Goal</button>
+          {this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>}
         </header>
         <div>
           <h2>Your goal is to <span>{this.state.userGoal}</span> : <span>{this.state.goalAmount}</span> times a week!</h2>
@@ -146,6 +179,7 @@ class App extends Component {
           updateGoal={this.handleChange}
           toggleHidden={this.toggleHidden}
           toggle={this.state.isHidden}
+          user={this.state.user}
         />}
         
         <p className="instructions">Make your goal a habit! For each day you complete your activity select how many times. Check the progress section to see how you are doing.</p>

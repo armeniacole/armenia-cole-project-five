@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import firebase from './firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown } from '@fortawesome/free-solid-svg-icons'
@@ -19,7 +20,8 @@ class SetGoal extends Component {
         //     this.props.goalState = selected;
         // }
 
-        const dbRef = firebase.database().ref("goal");
+        console.log(this.props.user)
+        const dbRef = firebase.database().ref(this.props.user ? `users/${this.props.user.uid}/goal` : `goal`);
         dbRef.set({
             number: this.props.goalState,
             activity: this.props.goalString
