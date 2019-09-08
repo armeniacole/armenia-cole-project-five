@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortDown } from '@fortawesome/free-solid-svg-icons'
 
 class Counter extends Component {
 
     render(){
         return(
             <div className="select-container">
+                <FontAwesomeIcon icon={faSortDown} className="select-arrow" />
                 <select
                     name="times"
                     onChange={(event) => this.props.trackerFunction(event, this.props.weekIndex, this.props.dayIndex)}

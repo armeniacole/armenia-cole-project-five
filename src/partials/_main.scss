@@ -33,6 +33,9 @@ p {
 	font-size: 0.8rem;
 }
 
+.tracker p {
+	font-family: 'Work Sans', sans-serif;
+}
 select {
     background: $background;
     border: none;
@@ -40,6 +43,7 @@ select {
 	width: 100%;
     padding: 10px;
 	color: $text;
+	padding-left: 15px;
 
 	/* Here's the code we need */
 	-webkit-appearance: none;
@@ -50,18 +54,19 @@ select {
 }
 
 .select-container {
-	position: relative;	
+    position: relative;
 }
 
-.select-container:after {
-	font-family: 'Font Awesome 5 Solid';
-  	content: '\f107';
-  	// font-size: 28px;
-  	position: absolute;
-  	top: 12px;
-  	right: 20px;
-  	color: #434B67;
-  	// pointer-events: none;
+.select-arrow {
+    color: $text;
+    right: 10px;
+	padding-right: 5px;
+    font-size: 1.3rem;
+    position:absolute;
+    display:block;
+    z-index: 10;
+    margin: 0;
+    pointer-events:none;
 }
 
 button {
