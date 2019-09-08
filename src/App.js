@@ -145,41 +145,44 @@ class App extends Component {
           toggle={this.state.isHidden}
         />}
         
-        <p>some instructions</p>
-        <section className="tracker">
-          <p>Monday</p>
-          <p>Tuesday</p>
-          <p>Wednesday</p>
-          <p>Thursday</p>
-          <p>Friday</p>
-          <p>Saturday</p>
-          <p>Sunday</p>
-
-          {
-            this.state.month.map((week, weekIndex) => {
-              return(
-                week.map((day, dayIndex) => {
-                  return <Counter 
-                            key={weekIndex+dayIndex}
-                            dayIndex={dayIndex}
-                            weekIndex={weekIndex}
-                            trackerFunction={this.trackerValue}
-                            value={this.state.month[weekIndex][dayIndex]}
-                          />
-                })
-              )
-            })
-
-          }
-        </section>
-          <button onClick={this.handleClear}>Clear Tracked Data</button>
+        <p className="instructions">Make your goal a habit! For each day you complete your activity select how many times. Check the progress section to see how you are doing.</p>
+        <div className="flex-main">
+          <section className="tracker">
+            <p>Mon</p>
+            <p>Tue</p>
+            <p>Wed</p>
+            <p>Thur</p>
+            <p>Fri</p>
+            <p>Sat</p>
+            <p>Sun</p>
+  
+            {
+              this.state.month.map((week, weekIndex) => {
+                return(
+                  week.map((day, dayIndex) => {
+                    return <Counter 
+                              key={weekIndex+dayIndex}
+                              dayIndex={dayIndex}
+                              weekIndex={weekIndex}
+                              trackerFunction={this.trackerValue}
+                              value={this.state.month[weekIndex][dayIndex]}
+                            />
+                  })
+                )
+              })
+  
+            }
+          </section>
+  
+          <section className="results">
+          	<p><span>Week One:</span> {progressMessage(this.state.weekOne)}</p>
+            <p><span>Week Two:</span> {progressMessage(this.state.weekTwo)}</p>
+            <p><span>Week Three:</span> {progressMessage(this.state.weekThree)}</p>
+            <p><span>Week Four:</span> {progressMessage(this.state.weekFour)}</p>
+            <button onClick={this.handleClear}>Clear Tracked Data</button>
+          </section>
+        </div>
         {/* <button onClick={(event) => { if (window.confirm('Delete the item?')) { this.handleClear() }; }}>Clear Tracked Data</button> */}
-
-
-        <p>Week One: {progressMessage(this.state.weekOne)}</p>
-        <p>Week Two: {progressMessage(this.state.weekTwo)}</p>
-        <p>Week Three: {progressMessage(this.state.weekThree)}</p>
-        <p>Week Four: {progressMessage(this.state.weekFour)}</p>
       </div>
     );
   }

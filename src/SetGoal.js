@@ -45,7 +45,7 @@ class SetGoal extends Component {
                                 <option value="7">Seven times</option>
                             </select> 
                         </div>
-                        <button onClick={this.props.toggleHidden}>Save Goal</button>
+                        <button>Save Goal</button>
                     </fieldset>
                 </form>  
             </section>
