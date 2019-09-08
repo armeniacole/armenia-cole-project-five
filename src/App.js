@@ -19,6 +19,7 @@ class App extends Component {
       weekFour: "",
       isHidden: true,
     }
+    this.toggleHidden = this.toggleHidden.bind(this);
   }
 
   handleChange = (event) => {
@@ -29,6 +30,8 @@ class App extends Component {
   }
 
   toggleHidden() {
+    console.log('stat', this.state);
+    // console.log("toggle")
     this.setState({
       isHidden: !this.state.isHidden
     })

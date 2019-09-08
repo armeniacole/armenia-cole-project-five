@@ -2,9 +2,13 @@ import React, {Component} from 'react';
 import firebase from './firebase';
 
 class SetGoal extends Component {
+    constructor(props) {
+        super(props)
+        this.state={};
+    }
     pushToFirebase = (event) => {
         event.preventDefault();
-
+        this.props.toggleHidden();
         // const selected = Number(event.target.value);
 
         // if (typeof (selected) === "number") {
@@ -51,7 +55,7 @@ class SetGoal extends Component {
                                 <option value="7">Seven times</option>
                             </select> 
                         </div>
-                        <button>Save Goal</button>
+                        <button >Save Goal</button>
                     </fieldset>
                 </form>  
             </section>
