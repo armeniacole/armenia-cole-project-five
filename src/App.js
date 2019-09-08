@@ -117,7 +117,7 @@ class App extends Component {
   render(){
     
     const progressMessage = (weekState) => {
-      if (weekState == 0) {
+      if (weekState === 0) {
         return 
       } else if (weekState < this.state.goalAmount) {
         return <p>You have {this.state.goalAmount - weekState} more time(s) reach this weeks goal</p>
