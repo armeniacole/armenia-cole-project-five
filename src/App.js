@@ -212,7 +212,7 @@ class App extends Component {
     
     return (
       <div className="App">
-        <header>
+        <header className="wrapper">
           <h1>(re)solution</h1>
           <button onClick={this.toggleHidden.bind(this)}>Set/Update Goal</button>
           {this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>}
@@ -228,10 +228,11 @@ class App extends Component {
           toggle={this.state.isHidden}
           user={this.state.user}
           userID={this.state.userID}
+          className="wrapper"
         />}
         
-        <p className="instructions">Make your goal a habit! For each day you complete your activity select how many times you did it. Check the progress section to see how you are doing. Please log in if you want to save your data.</p>
-        <div className="flex-main">
+        <p className="instructions wrapper">Make your goal a habit! For each day you complete your activity select how many times you did it. Check the progress section to see how you are doing. Please log in if you want to save your data.</p>
+        <div className="flex-main wrapper">
           <section className="tracker">
             <p>Mon</p>
             <p>Tue</p>
@@ -259,7 +260,7 @@ class App extends Component {
             }
           </section>
   
-          <section className="results">
+          <section className="results wrapper">
             {console.log("weekOne", this.state.weekOne)}
           	<p><span>Week One:</span> {progressMessage(this.state.weekOne)}</p>
             <p><span>Week Two:</span> {progressMessage(this.state.weekTwo)}</p>
@@ -269,6 +270,10 @@ class App extends Component {
           </section>
         </div>
         {/* <button onClick={(event) => { if (window.confirm('Delete the item?')) { this.handleClear() }; }}>Clear Tracked Data</button> */}
+
+        <footer>
+          <p>&copy; Armenia Cole 2019</p>
+        </footer>
       </div>
     );
   }

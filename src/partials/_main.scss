@@ -2,8 +2,12 @@ html {
     background: $background;
     font-size: calc(1.5vw + 10px);
 	line-height: 1.5;
+}
+
+.wrapper {
 	width: 90%;
 	margin: 0 auto;
+	max-width: 1280px;
 }
 
 h1  {
@@ -224,7 +228,8 @@ header {
 .flex-main {
 	display: flex;
 	align-items: center;
-	margin: 30px 0;
+	margin: 20px auto 40px;
+	
 
 	.tracker{
 		width: 60%;
@@ -246,6 +251,7 @@ header {
 
 		p {
 			font-size: 0.6rem;
+			
 		}
 
 		button {
@@ -269,6 +275,43 @@ header {
 			}
 
 		}
+	}
+}
+
+footer {
+	background: $main;
+	position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+	p {
+		padding: 3px 0;
+		font-size: 0.6rem;
+		color: $background;
+	}
+}
+
+@media (max-width: 1100px) {
+	.goals {
+		select {
+			padding: 10px 10px 10px 20px;
+		}
+		.goal-select-arrow {
+			right: 120px;
+		}
+
+	}
+}
+
+@media (max-width: 950px) {
+	.goals {
+		select {
+			padding: 10px 10px 10px 10px;
+		}
+		.goal-select-arrow {
+			right: 100px;
+		}
+
 	}
 }
 
@@ -303,6 +346,25 @@ header {
 		fieldset {
 			width: 90%;
 		}
+
+		select {
+			padding: 10px 10px 10px 30px;
+		}
+		.goal-select-arrow {
+			right: 150px;
+		}
+	}
+}
+
+@media (max-width: 700px) {
+	.goals {
+		select {
+			padding: 10px 10px 10px 10px;
+		}
+		.goal-select-arrow {
+			right: 110px;
+		}
+
 	}
 }
 
@@ -310,6 +372,14 @@ header {
 
 	.goals {
 		width: 90%;
+
+		select {
+			padding: 10px 10px 10px 40px;
+		}
+		.goal-select-arrow {
+			bottom: 25px
+		}
+
 		input, select {
 			width: 80%;
 			border-top: 3px solid transparent;
@@ -348,12 +418,26 @@ header {
 }
 
 @media (max-width: 400px) {
-	.select-arrow {
-		display: none;
+
+	.tracker {
+
+		.select-arrow {
+			display: none;
+		}
+	
+		select {
+			text-align: center;
+			border-bottom: 3px solid $main;
+		}
 	}
 
-	select {
-		text-align: center;
-		border-bottom: 3px solid $main;
+	.goals {
+		select {
+			padding: 10px 10px 10px 30px;
+		}
+		.goal-select-arrow {
+			right: 80px;
+		}
+
 	}
 }
