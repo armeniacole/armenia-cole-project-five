@@ -24,19 +24,19 @@ class App extends Component {
       user: null,
       userID: ""
     }
+    // allows save button to also toggle set goal
     this.toggleHidden = this.toggleHidden.bind(this);
   }
 
+  // updates goal amount select in set goal
   handleChange = (event) => {
-    // console.log(event.target.name);
     this.setState({
       [event.target.name]: event.target.value,
     })
   }
 
+  // toggles goal setting section
   toggleHidden() {
-    // console.log('stat', this.state);
-    // console.log("toggle")
     this.setState({
       isHidden: !this.state.isHidden
     })
@@ -44,15 +44,22 @@ class App extends Component {
 
 
   componentDidMount() {
-    
+    // this.addWeekly(this.state.month[0], "weekOne");
+    // this.addWeekly(this.state.month[1], "weekTwo");
+    // this.addWeekly(this.state.month[2], "weekThree");
+    // this.addWeekly(this.state.month[3], "weekFour");
+
+    // if user is logged in
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ 
           user,
+          // get their unique user key from auth and store it
           userID: user.uid
         
         }, () => {
 
+          // then grab the stuff that that user has saved in database and update state
           const dbRef = firebase.database().ref(`users/${this.state.userID}`);
           dbRef.on('value', (data) => {
       
@@ -71,7 +78,8 @@ class App extends Component {
             }, () => {
 
             }) 
-      
+            
+            // run function addWeekly to reduce the array for each week and store total in state
             this.addWeekly(this.state.month[0], "weekOne");
             this.addWeekly(this.state.month[1], "weekTwo");
             this.addWeekly(this.state.month[2], "weekThree");
@@ -80,7 +88,7 @@ class App extends Component {
           });
           
         });
-      }
+      } 
     });
     
     console.log(this.state.month[0])
@@ -88,34 +96,51 @@ class App extends Component {
     // console.log(this.state.user)
     // console.log("user id", this.state.userID)
     // console.log(this.state.month)
-  }
 
+
+  }
+  
+  // take the tracker info in state and update firebase 
   updateTracker = () => {
     const dbRef = firebase.database().ref(this.state.user ? `users/${this.state.userID}/goal/tracker` : `tracker`);
 
     dbRef.set(this.state.month)
   }
 
+  // this runs on change of tracker selects in Counter Component (this.props.trackerFunction(event, this.props.weekIndex, this.props.dayIndex))
 
   trackerValue = (event, weekIndex, dayIndex) => {
-    
+    // spreads array and saves
     const copiedArray = [...this.state.month];
-
+    // console.log("array",copiedArray)
+    // converts select inputs to a number
     const selected = Number(event.target.value);
-
+    // makes sure select value is now a number and then
     if (typeof(selected) === "number") {
+      // console.log("selected",selected)
+      // console.log("copied", copiedArray[weekIndex])
+
+
+      // sets the index of that array to the value that was selected
       copiedArray[weekIndex][dayIndex] = selected;
     }
     // copiedArray[weekIndex][dayIndex] = event.target.value;
     
-    this.setState({
+    this.setState({ 
+      // updates state with new value
       month: copiedArray
-    },(this.state.user ? this.updateTracker : null))
+      // if the user is logged in run updateTracker function to update firebase
+    }, (this.state.user ? this.updateTracker : null))
+
+    this.addWeekly(this.state.month[0], "weekOne");
+    this.addWeekly(this.state.month[1], "weekTwo");
+    this.addWeekly(this.state.month[2], "weekThree");
+    this.addWeekly(this.state.month[3], "weekFour");
   }
 
 
 
-
+  // deletes tracker data on click of button in result/message section
   handleClear = (event) => {
     event.preventDefault();
 
@@ -127,12 +152,15 @@ class App extends Component {
 
 
 
-
+  // takes an array to use and a state to update 
   addWeekly = (weekArray, weekState) => {
+    console.log(weekArray, weekState, 'hhee')
+    // reduces array to get the total
     const total = weekArray.reduce((total, integer) => {
       return total + integer
     })
-    const name = weekState
+    // updates the relevant state to hold total for comparison
+    const name = weekState;
     this.setState({
       [name]: total
     })
@@ -167,6 +195,7 @@ class App extends Component {
     // console.log(this.state.user)
     console.log(this.state.weekOne)
     
+    // runs the comparison for the total completed vs goal and then renders message to page
     const progressMessage = (weekState) => {
       if (weekState === 0) {
         return 
