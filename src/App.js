@@ -69,13 +69,14 @@ class App extends Component {
             this.addWeekly(this.state.month[1], "weekTwo");
             this.addWeekly(this.state.month[2], "weekThree");
             this.addWeekly(this.state.month[3], "weekFour");
+
           });
 
         });
       }
     });
 
-
+    console.log(this.state.weekOne)
   }
 
   updateTracker = () => {
@@ -124,7 +125,7 @@ class App extends Component {
     this.setState({
       [name]: total
     })
-    // console.log(name)
+  
   }
   
 
@@ -151,6 +152,7 @@ class App extends Component {
 
   render(){
     
+    
     const progressMessage = (weekState) => {
       if (weekState === 0) {
         return 
@@ -163,6 +165,8 @@ class App extends Component {
       } 
     }
 
+
+    
     return (
       <div className="App">
         <header>

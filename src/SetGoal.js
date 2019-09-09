@@ -20,7 +20,7 @@ class SetGoal extends Component {
         //     this.props.goalState = selected;
         // }
 
-        console.log(this.props.user)
+        
         const dbRef = firebase.database().ref(this.props.user ? `users/${this.props.user.uid}/goal` : `goal`);
         dbRef.set({
             number: this.props.goalState,
