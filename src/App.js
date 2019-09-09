@@ -58,8 +58,8 @@ class App extends Component {
       
             const dataBase = data.val();
             
-            console.log(dataBase.tracker)
-            console.log("user id in dbref call", this.state.userID)
+            // console.log(dataBase.tracker)
+            // console.log("user id in dbref call", this.state.userID)
             const activity = dataBase.goal.activity;
             const number = dataBase.goal.number;
             const tracker = dataBase.goal.tracker;
@@ -68,23 +68,26 @@ class App extends Component {
               userGoal: activity,
               goalAmount: number,
               month: tracker
-            })
+            }, () => {
+
+            }) 
       
-          
             this.addWeekly(this.state.month[0], "weekOne");
             this.addWeekly(this.state.month[1], "weekTwo");
             this.addWeekly(this.state.month[2], "weekThree");
             this.addWeekly(this.state.month[3], "weekFour");
-
+            
           });
-
+          
         });
       }
     });
-
+    
+    console.log(this.state.month[0])
+    
     // console.log(this.state.user)
-    console.log("user id", this.state.userID)
-    console.log(this.state.month)
+    // console.log("user id", this.state.userID)
+    // console.log(this.state.month)
   }
 
   updateTracker = () => {
@@ -107,7 +110,7 @@ class App extends Component {
     
     this.setState({
       month: copiedArray
-    },this.updateTracker)
+    },(this.state.user ? this.updateTracker : null))
   }
 
 
@@ -162,8 +165,7 @@ class App extends Component {
   render(){
     
     // console.log(this.state.user)
-    console.log("user id", this.state.userID)
-    console.log(this.state)
+    console.log(this.state.weekOne)
     
     const progressMessage = (weekState) => {
       if (weekState === 0) {
@@ -229,6 +231,7 @@ class App extends Component {
           </section>
   
           <section className="results">
+            {console.log("weekOne", this.state.weekOne)}
           	<p><span>Week One:</span> {progressMessage(this.state.weekOne)}</p>
             <p><span>Week Two:</span> {progressMessage(this.state.weekTwo)}</p>
             <p><span>Week Three:</span> {progressMessage(this.state.weekThree)}</p>
