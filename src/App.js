@@ -47,9 +47,7 @@ class App extends Component {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user }, () => {
-          console.log(this.state.user.uid)
-          // {this.state.user ? `users/${this.state.user.uid}` : ``}
-          // {userIsLoggedIn ? <h1>Welcome, friend!</h1> : null}
+
           const dbRef = firebase.database().ref(this.state.user ? `users/${this.state.user.uid}` : ``);
           dbRef.on('value', (data) => {
       
