@@ -71,7 +71,8 @@ class SetGoal extends Component {
                                 </select>
                             </div> 
                         </div>
-                        <button >Save Goal</button>
+                        <label className="save-label" htmlFor="save"><span className="visually-hidden">Save Goal</span> Warning: Clicking this button will erase your previous tracker data. Click set/update to escape.</label>
+                        <button name="save">Save Goal</button>
                     </fieldset>
                 </form>  
             </section>
