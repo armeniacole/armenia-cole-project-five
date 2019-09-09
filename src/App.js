@@ -230,7 +230,7 @@ class App extends Component {
           userID={this.state.userID}
         />}
         
-        <p className="instructions">Make your goal a habit! For each day you complete your activity select how many times you did it. Check the progress section to see how you are doing.</p>
+        <p className="instructions">Make your goal a habit! For each day you complete your activity select how many times you did it. Check the progress section to see how you are doing. Please log in if you want to save your data.</p>
         <div className="flex-main">
           <section className="tracker">
             <p>Mon</p>
