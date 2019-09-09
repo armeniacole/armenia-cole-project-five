@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/resolution/static/css/main.fe5d098f.chunk.css",
-    "main.js": "/resolution/static/js/main.73eb016a.chunk.js",
-    "main.js.map": "/resolution/static/js/main.73eb016a.chunk.js.map",
-    "runtime~main.js": "/resolution/static/js/runtime~main.db6cd5aa.js",
-    "runtime~main.js.map": "/resolution/static/js/runtime~main.db6cd5aa.js.map",
-    "static/js/2.bc80657b.chunk.js": "/resolution/static/js/2.bc80657b.chunk.js",
-    "static/js/2.bc80657b.chunk.js.map": "/resolution/static/js/2.bc80657b.chunk.js.map",
-    "index.html": "/resolution/index.html",
-    "precache-manifest.5064df8c4172d77b01d9d2dc999e6031.js": "/resolution/precache-manifest.5064df8c4172d77b01d9d2dc999e6031.js",
-    "service-worker.js": "/resolution/service-worker.js",
-    "static/css/main.fe5d098f.chunk.css.map": "/resolution/static/css/main.fe5d098f.chunk.css.map"
+    "main.css": "/armenia-cole-project-five/static/css/main.fe5d098f.chunk.css",
+    "main.js": "/armenia-cole-project-five/static/js/main.64c31a29.chunk.js",
+    "main.js.map": "/armenia-cole-project-five/static/js/main.64c31a29.chunk.js.map",
+    "runtime~main.js": "/armenia-cole-project-five/static/js/runtime~main.0677bfb8.js",
+    "runtime~main.js.map": "/armenia-cole-project-five/static/js/runtime~main.0677bfb8.js.map",
+    "static/js/2.468f2bd3.chunk.js": "/armenia-cole-project-five/static/js/2.468f2bd3.chunk.js",
+    "static/js/2.468f2bd3.chunk.js.map": "/armenia-cole-project-five/static/js/2.468f2bd3.chunk.js.map",
+    "index.html": "/armenia-cole-project-five/index.html",
+    "precache-manifest.65d1cd9c4169d6b6b9877abc8d546c97.js": "/armenia-cole-project-five/precache-manifest.65d1cd9c4169d6b6b9877abc8d546c97.js",
+    "service-worker.js": "/armenia-cole-project-five/service-worker.js",
+    "static/css/main.fe5d098f.chunk.css.map": "/armenia-cole-project-five/static/css/main.fe5d098f.chunk.css.map"
   }
 }
