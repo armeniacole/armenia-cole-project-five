@@ -13,7 +13,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      userGoal: '______',
+      userGoal: '',
       goalAmount: 0,
       month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]],
       weekOne: "",
@@ -28,7 +28,7 @@ class App extends Component {
     this.toggleHidden = this.toggleHidden.bind(this);
   }
 
-  // updates goal amount select in set goal
+  // updates goal amount and goal name in set goal
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
