@@ -21,10 +21,15 @@ class SetGoal extends Component {
         // }
 
         
-        const dbRef = firebase.database().ref(this.props.user ? `users/${this.props.user.uid}/goal` : `goal`);
+        const dbRef = firebase.database().ref(this.props.user ? `users/${this.props.userID}/goal` : `goal`);
         dbRef.set({
             number: this.props.goalState,
             activity: this.props.goalString
+        });
+
+        firebase.database().ref(this.props.user ? `users/${this.props.userID}/tracker` : `tracker`);
+        dbRef.update({
+            tracker: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]],
         });
     };
 

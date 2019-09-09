@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import './App.scss';
 import firebase from './firebase';
 import SetGoal from './SetGoal';
@@ -13,7 +13,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      userGoal: '',
+      userGoal: '______',
       goalAmount: 0,
       month: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]],
       weekOne: "",
@@ -21,7 +21,8 @@ class App extends Component {
       weekThree: "",
       weekFour: "",
       isHidden: true,
-      user: null
+      user: null,
+      userID: ""
     }
     this.toggleHidden = this.toggleHidden.bind(this);
   }
@@ -46,16 +47,22 @@ class App extends Component {
     
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user }, () => {
+        this.setState({ 
+          user,
+          userID: user.uid
+        
+        }, () => {
 
-          const dbRef = firebase.database().ref(this.state.user ? `users/${this.state.user.uid}` : ``);
+          const dbRef = firebase.database().ref(`users/${this.state.userID}`);
           dbRef.on('value', (data) => {
       
             const dataBase = data.val();
-            // console.log(dataBase);
+            
+            console.log(dataBase.tracker)
+            console.log("user id in dbref call", this.state.userID)
             const activity = dataBase.goal.activity;
             const number = dataBase.goal.number;
-            const tracker = dataBase.tracker;
+            const tracker = dataBase.goal.tracker;
       
             this.setState({
               userGoal: activity,
@@ -63,6 +70,7 @@ class App extends Component {
               month: tracker
             })
       
+          
             this.addWeekly(this.state.month[0], "weekOne");
             this.addWeekly(this.state.month[1], "weekTwo");
             this.addWeekly(this.state.month[2], "weekThree");
@@ -74,11 +82,13 @@ class App extends Component {
       }
     });
 
-    console.log(this.state.weekOne)
+    // console.log(this.state.user)
+    console.log("user id", this.state.userID)
+    console.log(this.state.month)
   }
 
   updateTracker = () => {
-    const dbRef = firebase.database().ref(this.state.user ? `users/${this.state.user.uid}/tracker` : `tracker`);
+    const dbRef = firebase.database().ref(this.state.user ? `users/${this.state.userID}/goal/tracker` : `tracker`);
 
     dbRef.set(this.state.month)
   }
@@ -132,7 +142,8 @@ class App extends Component {
       .then((result) => {
         const user = result.user;
         this.setState({
-          user
+          user, 
+          userID: user.uid
         });
       });
   }
@@ -150,6 +161,9 @@ class App extends Component {
 
   render(){
     
+    // console.log(this.state.user)
+    console.log("user id", this.state.userID)
+    console.log(this.state)
     
     const progressMessage = (weekState) => {
       if (weekState === 0) {
@@ -182,9 +196,10 @@ class App extends Component {
           toggleHidden={this.toggleHidden}
           toggle={this.state.isHidden}
           user={this.state.user}
+          userID={this.state.userID}
         />}
         
-        <p className="instructions">Make your goal a habit! For each day you complete your activity select how many times. Check the progress section to see how you are doing.</p>
+        <p className="instructions">Make your goal a habit! For each day you complete your activity select how many times you did it. Check the progress section to see how you are doing.</p>
         <div className="flex-main">
           <section className="tracker">
             <p>Mon</p>

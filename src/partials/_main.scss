@@ -39,19 +39,19 @@ p {
 
 select {
     background: $background;
-    border: none;
+	border: none;
 	border-bottom: 5px solid $main;
 	width: 100%;
     padding: 10px;
 	color: $text;
 	padding-left: 15px;
 
-	/* Here's the code we need */
+	-webkit-border-radius: 0px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	-ms-appearance: none;
-	 -o-appearance: none;
-		appearance: none;
+	-o-appearance: none;
+	appearance: none;
 }
 
 .select-container {
@@ -132,6 +132,7 @@ header {
 		font-size: 0.8rem;
 		text-align: center;
 		color: $background;
+		-webkit-border-radius: 0px;
 
 		&::placeholder {
 			color: $background;
@@ -273,8 +274,20 @@ header {
 
 		.results {
 			margin-top: 40px;
-			width: 60%;
+			width: 90%;
 			min-height: 30vh;
+			
+			span {
+				font-size: 1.3rem;
+			}
+
+			p {
+				font-size: 1rem;
+			}
+
+			button {
+				font-size: 0.8rem;
+			}
 		}
 	}
 
@@ -288,6 +301,7 @@ header {
 @media (max-width: 500px) {
 
 	.goals {
+		width: 90%;
 		input, select {
 			width: 80%;
 			border-top: 3px solid transparent;
