@@ -2,8 +2,12 @@ html {
     background: $background;
     font-size: calc(1.5vw + 10px);
 	line-height: 1.5;
+}
+
+.wrapper {
 	width: 90%;
 	margin: 0 auto;
+	max-width: 1280px;
 }
 
 h1  {
@@ -123,7 +127,7 @@ header {
 
 	input {
 		border: none;
-		margin-bottom: 10px;
+		margin-bottom: 5px;
 		border-top: 5px solid transparent;
 		border-bottom: 5px solid $background;
 		width: 60%;
@@ -150,7 +154,7 @@ header {
 
 	select {
 		width: 60%;
-		margin: 0 auto 40px;
+		margin: 0 auto 20px;
 		// text-align: center;
 		border-top: 5px solid transparent;
 		border-bottom: 5px solid $background;
@@ -173,7 +177,7 @@ header {
 	.goal-select-arrow {
 		color: $background;
 		right: 150px;
-		bottom: 55px;
+		bottom: 37px;
 		// padding-right: 5px;
 		font-size: 1.5rem;
 		position:absolute;
@@ -207,7 +211,7 @@ header {
 		display: block;
 		font-size: 0.6rem;
 		width: 70%;
-		margin: 0 auto;
+		margin: 0 auto 10px;
 		padding-bottom: 10px;
 	}
 
@@ -218,13 +222,20 @@ header {
 		background: $main;
 		border-radius: 10px;
 		box-shadow: 10px 10px $text;
+
+		p {
+			color: $background;
+			margin-bottom: 15px;
+
+		}
 	}
 }
 
 .flex-main {
 	display: flex;
 	align-items: center;
-	margin: 30px 0;
+	margin: 20px auto 40px;
+	
 
 	.tracker{
 		width: 60%;
@@ -246,6 +257,7 @@ header {
 
 		p {
 			font-size: 0.6rem;
+			
 		}
 
 		button {
@@ -269,6 +281,43 @@ header {
 			}
 
 		}
+	}
+}
+
+footer {
+	background: $main;
+	position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+	p {
+		padding: 3px 0;
+		font-size: 0.6rem;
+		color: $background;
+	}
+}
+
+@media (max-width: 1100px) {
+	.goals {
+		select {
+			padding: 10px 10px 10px 20px;
+		}
+		.goal-select-arrow {
+			right: 120px;
+		}
+
+	}
+}
+
+@media (max-width: 950px) {
+	.goals {
+		select {
+			padding: 10px 10px 10px 10px;
+		}
+		.goal-select-arrow {
+			right: 100px;
+		}
+
 	}
 }
 
@@ -303,6 +352,25 @@ header {
 		fieldset {
 			width: 90%;
 		}
+
+		select {
+			padding: 10px 10px 10px 30px;
+		}
+		.goal-select-arrow {
+			right: 150px;
+		}
+	}
+}
+
+@media (max-width: 700px) {
+	.goals {
+		select {
+			padding: 10px 10px 10px 10px;
+		}
+		.goal-select-arrow {
+			right: 110px;
+		}
+
 	}
 }
 
@@ -310,6 +378,14 @@ header {
 
 	.goals {
 		width: 90%;
+
+		select {
+			padding: 10px 10px 10px 40px;
+		}
+		.goal-select-arrow {
+			bottom: 25px
+		}
+
 		input, select {
 			width: 80%;
 			border-top: 3px solid transparent;
@@ -328,8 +404,8 @@ header {
 		font-size: 0.8rem;
 	}
 	.flex-main{
-
-		margin: 5px;
+		width: 95%;
+		margin-top: 10px;
 		.results {
 			width: 90%;
 		}
@@ -347,13 +423,36 @@ header {
 
 }
 
-@media (max-width: 400px) {
-	.select-arrow {
-		display: none;
+@media (max-width: 420px) {
+
+	.tracker {
+
+		.select-arrow {
+			display: none;
+		}
+	
+		select {
+			text-align: center;
+			border-bottom: 3px solid $main;
+			padding-left: 8px;
+		}
 	}
 
-	select {
-		text-align: center;
-		border-bottom: 3px solid $main;
+	.goals {
+		select {
+			padding: 10px 10px 10px 30px;
+		}
+		.goal-select-arrow {
+			right: 80px;
+		}
+
+	}
+}
+
+@media (max-width: 400px) {
+	header {
+		button {
+			padding: 5px 10px;
+		}
 	}
 }

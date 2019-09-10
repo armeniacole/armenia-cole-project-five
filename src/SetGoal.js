@@ -19,7 +19,8 @@ class SetGoal extends Component {
         // if (typeof (selected) === "number") {
         //     this.props.goalState = selected;
         // }
-
+        
+        
         
         const dbRef = firebase.database().ref(this.props.user ? `users/${this.props.userID}/goal` : `goal`);
         dbRef.set({
@@ -34,7 +35,9 @@ class SetGoal extends Component {
     };
 
     render(){
-
+        
+        const isEnabled = this.props.goalString.length > 0;
+        
         return(
             
             <section className="goals">
@@ -50,6 +53,7 @@ class SetGoal extends Component {
                                 placeholder="eg: go for a run"
                                 onChange={this.props.updateGoal}
                             />
+                            {!isEnabled ? <p>Please set a goal</p> : null}
                         </div>
                         <div>
                             <div className="select-container">
@@ -72,7 +76,7 @@ class SetGoal extends Component {
                             </div> 
                         </div>
                         <label className="save-label" htmlFor="save"><span className="visually-hidden">Save Goal</span> Warning: Clicking this button will erase your previous tracker data. Click set/update to escape.</label>
-                        <button name="save">Save Goal</button>
+                        <button disabled={!isEnabled} name="save">Save Goal</button>
                     </fieldset>
                 </form>  
             </section>
