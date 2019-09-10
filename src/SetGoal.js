@@ -1,19 +1,36 @@
 import React, {Component} from 'react';
+
 import firebase from './firebase';
 
 class SetGoal extends Component {
     pushToFirebase = (event) => {
         event.preventDefault();
+        this.props.toggleHidden();
 
-        const dbRef = firebase.database().ref("goal");
+        // const selected = Number(event.target.value);
+
+        // if (typeof (selected) === "number") {
+        //     this.props.goalState = selected;
+        // }
+        
+        
+        
+        const dbRef = firebase.database().ref(this.props.user ? `users/${this.props.userID}/goal` : `goal`);
         dbRef.set({
             number: this.props.goalState,
             activity: this.props.goalString
         });
+
+        firebase.database().ref(this.props.user ? `users/${this.props.userID}/tracker` : `tracker`);
+        dbRef.update({
+            tracker: [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]],
+        });
     };
 
     render(){
-
+        
+        const isEnabled = this.props.goalString.length > 0;
+        
         return(
             
             <section className="goals">
@@ -27,6 +44,7 @@ class SetGoal extends Component {
                                 type="text"
                                 onChange={this.props.updateGoal}
                             />
+                            {!isEnabled ? <p>Please set a goal</p> : null}
                         </div>
                         <div>
                             <p>How many times per week?</p>
@@ -44,7 +62,8 @@ class SetGoal extends Component {
                                 <option value="7">Seven times</option>
                             </select> 
                         </div>
-                        <button>Save Goal</button>
+                        <label className="save-label" htmlFor="save"><span className="visually-hidden">Save Goal</span> Warning: Clicking this button will erase your previous tracker data. Click set/update to escape.</label>
+                        <button disabled={!isEnabled} name="save">Save Goal</button>
                     </fieldset>
                 </form>  
                 <div>
